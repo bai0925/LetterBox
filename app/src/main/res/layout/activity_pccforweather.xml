@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <!--因为碎片不能直接显示在界面上，所以将它添加在活动对应的布局文件中，
+    并让它充满整个布局-->
+    <fragment
+        android:id="@+id/choose_area_fragment"
+        android:name="com.util.ChooseAreaFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+    </FrameLayout>
+

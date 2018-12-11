@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--上面的是菜单弹出时的效果， translate 位置转移动画效果   duration  属性为动画持续时间
+     ，fromXDelta 属性为动画起始时 X坐标上的位置  toYDelta   属性为动画结束时 Y坐标上的位置 ，属性里面还可以加上%和p,例如:-->
+    <!--android:toXDelta=”100%”,表示自身的100%,也就是从View自己的位置开始。-->
+    <!--android:toXDelta=”80%p”,表示父层View的80%,是以它父层View为参照的。-->
+
+    <translate
+        android:duration="250"
+        android:fromYDelta="100%p"
+        android:toYDelta="0" />
+
+    <alpha
+        android:duration="500"
+        android:fromAlpha="0.0"
+        android:toAlpha="1.0" />
+
+</set>

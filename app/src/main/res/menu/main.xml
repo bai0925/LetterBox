@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--<item-->
+        <!--android:id="@+id/action_settings"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:title="测试"-->
+        <!--android:icon="@mipmap/ic_mine"-->
+        <!--app:showAsAction="never" />-->
+    <!--<item-->
+        <!--android:id="@+id/open_lock"-->
+        <!--android:icon="@mipmap/ic_open_lock"-->
+        <!--app:showAsAction="always"-->
+        <!--android:title="快捷开锁"/>-->
+    <!--<item-->
+        <!--android:id="@+id/weather"-->
+        <!--android:icon="@mipmap/ic_weather"-->
+        <!--app:showAsAction="always"-->
+        <!--android:title="显示天气"/>-->
+</menu>

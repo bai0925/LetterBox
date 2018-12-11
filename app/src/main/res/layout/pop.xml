@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--这个布局就是点击标题栏的锁图标时显示的布局-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/signup_bg"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/psw_openlock"
+            android:layout_width="200dp"
+            android:layout_height="85dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="40dp"
+            android:background="@mipmap/openlock_code_bg"
+            android:layout_gravity="center"
+            android:onClick="passworOpenLock" />
+
+        <Button
+            android:id="@+id/face_openlock"
+            android:layout_width="200dp"
+            android:layout_height="85dp"
+            android:background="@mipmap/openlock_face_bg"
+            android:onClick="faceOpenLock"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+</LinearLayout>

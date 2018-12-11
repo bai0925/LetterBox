@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:leon="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.acer.letterbox4.SettingsActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/setting_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" >
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:layout_gravity="center"
+                android:textSize="20dp"
+                android:text="设置"/>
+        </android.support.v7.widget.Toolbar>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_marginBottom="16dp"
+            android:background="#fff"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/headimage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/ic_mine"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="朱小明"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!--android:onClick="showAccountSetting"-->
+                <com.leon.lib.settingview.LSettingItem
+                    android:id="@+id/account_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    leon:isShowRightText="true"
+                    leon:leftIcon="@mipmap/ic_account_setting"
+                    leon:leftText="账号设置"
+                    leon:rightText="99+"
+                    leon:rightTextColor="@color/gray"
+                    leon:rightTextSize="14dp" >
+                </com.leon.lib.settingview.LSettingItem>
+                <!--leon:leftTextMarginLeft="30dp"-->
+
+                <LinearLayout
+                    android:id="@+id/account_setting_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true">
+                    <!--这里放账号设置的更详细的设置-->
+                    <com.leon.lib.settingview.LSettingItem
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        leon:leftIcon="@mipmap/ic_change_bind_phone"
+                        leon:leftText="换绑手机号"
+                        leon:rightStyle="iconHide" />
+
+                </LinearLayout>
+
+
+                <com.leon.lib.settingview.LSettingItem
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    leon:leftIcon="@mipmap/ic_security_setting"
+                    leon:leftText="安全设置"
+                    leon:rightStyle="iconShow" >
+
+                </com.leon.lib.settingview.LSettingItem>
+
+
+                <com.leon.lib.settingview.LSettingItem
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    leon:isShowRightText="true"
+                    leon:leftIcon="@mipmap/ic_check_updata"
+                    leon:leftText="检查更新"
+                    leon:rightText="V1.0.0"
+                    leon:rightTextColor="@color/colorPrimary" />
+
+                <com.leon.lib.settingview.LSettingItem
+                    android:id="@+id/item_four"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    leon:leftIcon="@mipmap/ic_mine"
+                    leon:leftText="我的购物车"
+                    leon:rightStyle="iconCheck"/>
+
+
+                <com.leon.lib.settingview.LSettingItem
+                    android:id="@+id/item_five"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    leon:isShowUnderLine="false"
+                    leon:leftIcon="@mipmap/ic_mine"
+                    leon:leftText="我的位置"
+                    leon:rightStyle="iconSwitch"/>
+
+                <com.leon.lib.settingview.LSettingItem
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    leon:isShowUnderLine="false"
+                    leon:leftText="不显示分割线"
+                    leon:rightStyle="iconSwitch"/>
+                <com.leon.lib.settingview.LSettingItem
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    leon:isShowUnderLine="false"
+                    leon:leftText="不显示分割线"
+                    leon:rightStyle="iconSwitch"/>
+
+                <Button
+                    android:id="@+id/exit_signin"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="退出登陆"
+                    android:textSize="17dp"
+                    android:background="@drawable/btn_up_down"/>
+
+                <!--我是有底线的-->
+                <LinearLayout
+                    android:layout_marginBottom="8dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <View
+                        android:background="#bbb"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"/>
+                    <TextView
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="我是有底线的"
+                        android:textSize="13dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp" />
+                    <View
+                        android:background="#bbb"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

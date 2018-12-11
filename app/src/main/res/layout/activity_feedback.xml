@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:leon="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.acer.letterbox4.FeedbackActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/setting_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay" >
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:layout_gravity="center"
+            android:textSize="20dp"
+            android:text="反馈"/>
+    </android.support.v7.widget.Toolbar>
+
+        <RelativeLayout
+            android:id="@+id/ll_area_input"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fff"
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:visibility="visible">
+
+            <EditText
+                android:id="@+id/et_input_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="150dp"
+                android:maxHeight="200dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:gravity="left"
+                android:textColor="#666"
+                android:hint="请输入您宝贵的意见"
+                android:padding="7dp" />
+
+            <TextView
+                android:id="@+id/tv_limit_area"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/et_input_area"
+                android:layout_alignRight="@id/et_input_area"
+                android:layout_gravity="right"
+                android:layout_margin="5dp"
+                android:gravity="right"
+                android:text="0/200" />
+
+            <TextView
+                android:id="@+id/tv_info_area"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/et_input_area"
+                android:layout_alignStart="@+id/et_input_area"
+                android:layout_below="@+id/et_input_area"
+                android:layout_marginTop="40dp"
+                android:text="您的支持是对我们最大的鼓励！"
+                android:textColor="@color/gray" />
+
+            <Button
+                android:id="@+id/submit_suggestion"
+                android:onClick="submit"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/et_input_area"
+                android:layout_marginTop="66dp"
+                android:background="@drawable/btn_up_down"
+                android:padding="12dp"
+                android:text="提交"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

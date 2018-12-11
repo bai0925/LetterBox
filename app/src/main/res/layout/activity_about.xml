@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!---->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:leon="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.acer.letterbox4.AboutActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/setting_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay" >
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:layout_gravity="center"
+            android:textSize="20dp"
+            android:text="关于"/>
+
+    </android.support.v7.widget.Toolbar>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:padding="15dp"
+       android:orientation="vertical">
+
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="版本号                                           1.0.0"
+           android:textSize="20sp"
+           android:layout_marginTop="10dp"/>
+
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+           
+       <TextView
+           android:id="@+id/tv_usingInfo"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="使用说明"
+           android:textSize="20sp"
+           android:layout_marginTop="20dp"/>
+           
+           <CheckBox
+               android:id="@+id/cbUsingInfo"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_toRightOf="@id/tv_usingInfo"
+               android:layout_marginLeft="200dp"
+               android:layout_alignBaseline="@id/tv_usingInfo"/>
+
+       </RelativeLayout>
+
+   </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/usingInformation"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_info"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="#FFFFFF"
+            android:textSize="18sp"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.leon:lsettingviewlibrary-1.4.0">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/lsettingviewlibrary-1.4.0.aar/10a841c7594a5973539b30f186929d80/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/lsettingviewlibrary-1.4.0.aar/10a841c7594a5973539b30f186929d80/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.leon/lsettingviewlibrary/1.4.0/d2872846fb9e571352b93a636196e5b4147ab693/lsettingviewlibrary-1.4.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

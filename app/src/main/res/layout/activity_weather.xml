@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <!--DrawerLayout中的第一个子控件用于主屏幕中的显示内容，第二个子控件用于滑动菜单中显示的内容-->
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <!--在scrollView外面嵌套一层SwipeRefreshLayout，可以使ScrollView拥有下拉刷新功能-->
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <!--允许通过滚动的方式查看屏幕以外的内容，ScrollView只允许内部存在一个子布局，
+    因此让其嵌套一个LinearLayout，再引入其他布局-->
+    <ScrollView
+        android:id="@+id/weather"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <!--<Button-->
+                    <!--android:id="@+id/btn_backToArea"-->
+                    <!--android:onClick="backToArea"-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="50dp"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:background="@mipmap/ic_back"/>-->
+
+                <include layout="@layout/title"/>
+
+            </LinearLayout>
+
+            <include layout="@layout/now"/>
+
+            <include layout="@layout/forecast"/>
+
+            <include layout="@layout/aqi"/>
+
+            <include layout="@layout/suggestion"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+        <!--第二个子控件的位置添加用于遍历省市县数据的碎片-->
+    <fragment
+        android:id="@+id/choose_area_fragment"
+        android:name="com.util.ChooseAreaFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"/>
+
+    </android.support.v4.widget.DrawerLayout>
+
+</FrameLayout>
