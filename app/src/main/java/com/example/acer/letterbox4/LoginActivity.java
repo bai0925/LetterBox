@@ -590,65 +590,65 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode,int resultCode,Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        String imageBase="";
-        try{
-            //将拍摄的照片解析为bmp
-            Bitmap bitmap= BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
-            Bitmap bmp=new ImageFactory().ratio(bitmap,200,300);
-            //bmp转为byte数组
-            ByteArrayOutputStream baos=new ByteArrayOutputStream();
-            //Intent传输的bytes（里面存放的图片）不能超过40k，超过后活动就不能正常传递数据
-            //bmp.compress(Bitmap.CompressFormat.PNG,100,baos);//这种方式几乎不失真，但是图片太大
-            bmp.compress(Bitmap.CompressFormat.JPEG,20,baos);
-            //此为压缩80%，保留图片20%的质量
-            byte[]picbyte=baos.toByteArray();
-            //这里使用系统自带的Base64的包
-            imageBase= Base64.encodeToString(picbyte,Base64.DEFAULT);
-
-            //////////////////////////////android自带人脸检测//////////////////////////////
-            FaceDetector faceDetector = new FaceDetector(bitmap.getWidth(), bitmap.getHeight(), MAX_FACE_NUM);
-            FaceDetector.Face[] faces = new FaceDetector.Face[MAX_FACE_NUM];
-            realFaceNum = faceDetector.findFaces(bitmap, faces);
-
-            if (realFaceNum > 0) {
-                faceExit = true;
-                message.what = FACE_DETECT_SUCCESS;
-            } else {
-                faceExit = false;
-                message.what = FACE_DETECT_FAILED;
-            }
-
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+//        String imageBase="";
+//        try{
+//            //将拍摄的照片解析为bmp
+//            Bitmap bitmap= BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
+//            Bitmap bmp=new ImageFactory().ratio(bitmap,200,300);
+//            //bmp转为byte数组
+//            ByteArrayOutputStream baos=new ByteArrayOutputStream();
+//            //Intent传输的bytes（里面存放的图片）不能超过40k，超过后活动就不能正常传递数据
+//            //bmp.compress(Bitmap.CompressFormat.PNG,100,baos);//这种方式几乎不失真，但是图片太大
+//            bmp.compress(Bitmap.CompressFormat.JPEG,20,baos);
+//            //此为压缩80%，保留图片20%的质量
+//            byte[]picbyte=baos.toByteArray();
+//            //这里使用系统自带的Base64的包
+//            imageBase= Base64.encodeToString(picbyte,Base64.DEFAULT);
+//
+//            //////////////////////////////android自带人脸检测//////////////////////////////
+//            FaceDetector faceDetector = new FaceDetector(bitmap.getWidth(), bitmap.getHeight(), MAX_FACE_NUM);
+//            FaceDetector.Face[] faces = new FaceDetector.Face[MAX_FACE_NUM];
+//            realFaceNum = faceDetector.findFaces(bitmap, faces);
+//
+//            if (realFaceNum > 0) {
+//                faceExit = true;
+//                message.what = FACE_DETECT_SUCCESS;
+//            } else {
+//                faceExit = false;
+//                message.what = FACE_DETECT_FAILED;
+//            }
+//
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }
 
         switch (requestCode) {
             //如果是登录行为，将照片数据传给postSendForFaceSignIn函数
             case USER_SIGN_IN_ACTION:
-                if (resultCode == RESULT_OK) {
-                    if (usingFaceLogin) {
-                        if (message.what == FACE_DETECT_SUCCESS) {
+//                if (resultCode == RESULT_OK) {
+//                    if (usingFaceLogin) {
+//                        if (message.what == FACE_DETECT_SUCCESS) {
                             phoneNumber = signInUserName.getText().toString().trim();
                             postSendForFaceSignIn(phoneNumber, imageBase);
-                        }
-                        else if (message.what == FACE_DETECT_FAILED) {
-                            makeToast("未检测到人脸，无法上传登录");
-                        }
-                    }
-                }
+//                        }
+//                        else if (message.what == FACE_DETECT_FAILED) {
+//                            makeToast("未检测到人脸，无法上传登录");
+//                        }
+//                    }
+//                }
                 break;
 
             //如果是注册行为，将照片传给postSendForSignUp函数
             case USER_SIGN_UP_ACTION:
-                if (resultCode == RESULT_OK) {
-                    if (message.what == FACE_DETECT_SUCCESS){
+//                if (resultCode == RESULT_OK) {
+//                    if (message.what == FACE_DETECT_SUCCESS){
                         phoneNumber = signUpUserName.getText().toString().trim();
                         password=signUpPassword.getText().toString().trim();
                         postSendForSignUp(phoneNumber,password,imageBase);
-                    }
-                    else if (message.what == FACE_DETECT_FAILED)
-                        makeToast("未检测到人脸，无法上传进行注册");
-                }
+//                    }
+//                    else if (message.what == FACE_DETECT_FAILED)
+//                        makeToast("未检测到人脸，无法上传进行注册");
+//                }
                 break;
 
             //其他情况
