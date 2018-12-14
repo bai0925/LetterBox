@@ -590,20 +590,20 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode,int resultCode,Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        String imageBase="";
-//        try{
-//            //将拍摄的照片解析为bmp
-//            Bitmap bitmap= BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
-//            Bitmap bmp=new ImageFactory().ratio(bitmap,200,300);
-//            //bmp转为byte数组
-//            ByteArrayOutputStream baos=new ByteArrayOutputStream();
-//            //Intent传输的bytes（里面存放的图片）不能超过40k，超过后活动就不能正常传递数据
-//            //bmp.compress(Bitmap.CompressFormat.PNG,100,baos);//这种方式几乎不失真，但是图片太大
-//            bmp.compress(Bitmap.CompressFormat.JPEG,20,baos);
-//            //此为压缩80%，保留图片20%的质量
-//            byte[]picbyte=baos.toByteArray();
-//            //这里使用系统自带的Base64的包
-//            imageBase= Base64.encodeToString(picbyte,Base64.DEFAULT);
+        String imageBase="";
+        try{
+            //将拍摄的照片解析为bmp
+            Bitmap bitmap= BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
+            Bitmap bmp=new ImageFactory().ratio(bitmap,200,300);
+            //bmp转为byte数组
+            ByteArrayOutputStream baos=new ByteArrayOutputStream();
+            //Intent传输的bytes（里面存放的图片）不能超过40k，超过后活动就不能正常传递数据
+            //bmp.compress(Bitmap.CompressFormat.PNG,100,baos);//这种方式几乎不失真，但是图片太大
+            bmp.compress(Bitmap.CompressFormat.JPEG,20,baos);
+            //此为压缩80%，保留图片20%的质量
+            byte[]picbyte=baos.toByteArray();
+            //这里使用系统自带的Base64的包
+            imageBase= Base64.encodeToString(picbyte,Base64.DEFAULT);
 //
 //            //////////////////////////////android自带人脸检测//////////////////////////////
 //            FaceDetector faceDetector = new FaceDetector(bitmap.getWidth(), bitmap.getHeight(), MAX_FACE_NUM);
@@ -618,9 +618,9 @@ public class LoginActivity extends BaseActivity {
 //                message.what = FACE_DETECT_FAILED;
 //            }
 //
-//        }catch(Exception e){
-//            e.printStackTrace();
-//        }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
 
         switch (requestCode) {
             //如果是登录行为，将照片数据传给postSendForFaceSignIn函数
