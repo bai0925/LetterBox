@@ -14,7 +14,6 @@ import android.provider.MediaStore;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -209,32 +208,32 @@ public class LoginActivity extends BaseActivity {
 
     public void initID(){
         //登陆页
-        signUpGroup=(RelativeLayout) findViewById(R.id.SignUpGroup); //登陆布局
-        signInUserName=(EditText)findViewById(R.id.signInUserName); //手机号码输入框
-        signInPassword=(EditText)findViewById(R.id.signInPassword); //密码输入框
-        cbUseFaceSignIn=(CheckBox)findViewById(R.id.cbUseFaceSignIn); //刷脸登陆复选框
-        cbRememberPassword=(CheckBox)findViewById(R.id.cbRememberPassword); //记住密码复选框
-        btnForSignIn=(Button) findViewById(R.id.signInBtn);//登陆按钮
-        tvInSignIn=(TextView) findViewById(R.id.signInTv);//立即注册文本框
-        tv2InSignIn=(TextView) findViewById(R.id.signInTv2); //忘记密码文本框
+        signUpGroup= findViewById(R.id.SignUpGroup); //登陆布局
+        signInUserName= findViewById(R.id.signInUserName); //手机号码输入框
+        signInPassword= findViewById(R.id.signInPassword); //密码输入框
+        cbUseFaceSignIn= findViewById(R.id.cbUseFaceSignIn); //刷脸登陆复选框
+        cbRememberPassword= findViewById(R.id.cbRememberPassword); //记住密码复选框
+        btnForSignIn= findViewById(R.id.signInBtn);//登陆按钮
+        tvInSignIn= findViewById(R.id.signInTv);//立即注册文本框
+        tv2InSignIn= findViewById(R.id.signInTv2); //忘记密码文本框
 
         //注册页
-        signInGroup=(RelativeLayout)findViewById(R.id.SignInGrpup); //注册布局
-        signUpUserName=(EditText)findViewById(R.id.signUpUserName); //手机号码输入框
-        signUpPassword=(EditText)findViewById(R.id.signUpPassword); //密码输入框
-        codeForSignUp=(EditText)findViewById(R.id.codeForSignUp); //验证码输入框
-        btnGetCodeForSignUp=(Button)findViewById(R.id.btn_getCodeForSignUp); //获取验证码按钮
-        btnForSignUp=(Button) findViewById(R.id.signUpBtn);//注册按钮
-        tvInSignUp=(TextView)findViewById(R.id.signUpTv);
+        signInGroup= findViewById(R.id.SignInGrpup); //注册布局
+        signUpUserName= findViewById(R.id.signUpUserName); //手机号码输入框
+        signUpPassword= findViewById(R.id.signUpPassword); //密码输入框
+        codeForSignUp= findViewById(R.id.codeForSignUp); //验证码输入框
+        btnGetCodeForSignUp= findViewById(R.id.btn_getCodeForSignUp); //获取验证码按钮
+        btnForSignUp= findViewById(R.id.signUpBtn);//注册按钮
+        tvInSignUp= findViewById(R.id.signUpTv);
 
         //忘记密码页
-        rePasswordGroup=(RelativeLayout) findViewById(R.id.RePasswordGroup); //忘记密码布局
-        rePasswordUserName=(EditText)findViewById(R.id.rePasswordUserName); //手机号码输入框
-        rePassword=(EditText)findViewById(R.id.rePassword); //密码输入框
-        codeForRePassword=(EditText)findViewById(R.id.codeForRePassword); //验证码输入
-        btnGetCodeForRePassword=(Button)findViewById(R.id.btn_getCodeForRePassword); //获取验证码按钮
-        tvInRePassword=(TextView)findViewById(R.id.rePasswordTv); //返回登录文本框
-        btnForRePassword=(Button) findViewById(R.id.rePasswordBtn); //重置按钮
+        rePasswordGroup= findViewById(R.id.RePasswordGroup); //忘记密码布局
+        rePasswordUserName= findViewById(R.id.rePasswordUserName); //手机号码输入框
+        rePassword= findViewById(R.id.rePassword); //密码输入框
+        codeForRePassword= findViewById(R.id.codeForRePassword); //验证码输入
+        btnGetCodeForRePassword= findViewById(R.id.btn_getCodeForRePassword); //获取验证码按钮
+        tvInRePassword= findViewById(R.id.rePasswordTv); //返回登录文本框
+        btnForRePassword= findViewById(R.id.rePasswordBtn); //重置按钮
 
         //设置状态栏和标题栏同色（Android5.0以上才有用）
         try {
