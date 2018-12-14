@@ -82,7 +82,7 @@ public class LoginActivity extends BaseActivity {
     TextView tvInSignUp;
 
     //重置密码布局，手机号码，密码，验证码
-    LinearLayout rePasswordGroup;
+    RelativeLayout rePasswordGroup;
     EditText rePasswordUserName;
     EditText rePassword;
     EditText codeForRePassword; //输入验证码
@@ -238,7 +238,7 @@ public class LoginActivity extends BaseActivity {
         tvInSignUp=(TextView)findViewById(R.id.signUpTv);
 
         //忘记密码页
-        rePasswordGroup=(LinearLayout)findViewById(R.id.RePasswordGroup); //忘记密码布局
+        rePasswordGroup=(RelativeLayout) findViewById(R.id.RePasswordGroup); //忘记密码布局
         rePasswordUserName=(EditText)findViewById(R.id.rePasswordUserName); //手机号码输入框
         rePassword=(EditText)findViewById(R.id.rePassword); //密码输入框
         codeForRePassword=(EditText)findViewById(R.id.codeForRePassword); //验证码输入
