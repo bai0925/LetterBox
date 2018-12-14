@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.FaceDetector;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
@@ -15,6 +14,7 @@ import android.provider.MediaStore;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -22,37 +22,26 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.tools.BaseActivity;
 import com.tools.Httphelper;
-
 import com.tools.ImageFactory;
 import com.tools.Md5Encoding;
 import com.tools.SetImageUri;
 import com.tools.TimeCountUtil;
-
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginActivity extends BaseActivity {
-    //与检测人脸相关
-    private static final int MAX_FACE_NUM = 5;//最大可以检测出的人脸数量
-    private int realFaceNum = 0;//实际检测出的人脸数量
-    private boolean faceExit=false;
-    private final int FACE_DETECT_SUCCESS=20;
-    private final int FACE_DETECT_FAILED=21;
-    public Message message=new Message();
 
+public class LoginActivity extends BaseActivity {
     //用键值对的形式保存账号密码实现记住密码
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
 
     public static Uri imageUri; //相机拍摄照片的输出地址
-    private static final String TAG = "LoginActivity";
     private static final String domain = "47.101.173.82:8080";
     private boolean usingFaceLogin = false; //标识刷脸登陆
     private boolean isRemenberPsw = false; //标识记住密码
@@ -60,7 +49,6 @@ public class LoginActivity extends BaseActivity {
     String phoneNumber;
     String password;
     String codeInput;
-    String imageBase;
 
     //登陆布局
     RelativeLayout signInGroup;
@@ -104,6 +92,8 @@ public class LoginActivity extends BaseActivity {
     private TimeCountUtil timeCountUtilFSP;//注册页中获取验证码倒计时
     private TimeCountUtil timeCountUtilFRP;//忘记密码页中获取验证码倒计时
     public String codeGet; //获取验证码md5值
+
+    private  static final int SIGNIN_SUCCESS_ACTION=181;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -451,10 +441,8 @@ public class LoginActivity extends BaseActivity {
                 //此处实现主活动的滑动菜单的登录成功后的用户名显示
                 Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                 //mainusername是主界面用户图像下面的用户名
-                intent.putExtra("mainusername",phoneNumber);
-                setResult(RESULT_OK, intent);
                 finish();
-                startActivity(intent);
+                startActivityForResult(intent,SIGNIN_SUCCESS_ACTION);
             }
             return false;
         }
@@ -585,7 +573,6 @@ public class LoginActivity extends BaseActivity {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
     }
 
-
     //用于将照片数据处理返回上一个活动
     @Override
     protected void onActivityResult(int requestCode,int resultCode,Intent data) {
@@ -604,20 +591,6 @@ public class LoginActivity extends BaseActivity {
             byte[]picbyte=baos.toByteArray();
             //这里使用系统自带的Base64的包
             imageBase= Base64.encodeToString(picbyte,Base64.DEFAULT);
-//
-//            //////////////////////////////android自带人脸检测//////////////////////////////
-//            FaceDetector faceDetector = new FaceDetector(bitmap.getWidth(), bitmap.getHeight(), MAX_FACE_NUM);
-//            FaceDetector.Face[] faces = new FaceDetector.Face[MAX_FACE_NUM];
-//            realFaceNum = faceDetector.findFaces(bitmap, faces);
-//
-//            if (realFaceNum > 0) {
-//                faceExit = true;
-//                message.what = FACE_DETECT_SUCCESS;
-//            } else {
-//                faceExit = false;
-//                message.what = FACE_DETECT_FAILED;
-//            }
-//
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -625,30 +598,15 @@ public class LoginActivity extends BaseActivity {
         switch (requestCode) {
             //如果是登录行为，将照片数据传给postSendForFaceSignIn函数
             case USER_SIGN_IN_ACTION:
-//                if (resultCode == RESULT_OK) {
-//                    if (usingFaceLogin) {
-//                        if (message.what == FACE_DETECT_SUCCESS) {
-                            phoneNumber = signInUserName.getText().toString().trim();
-                            postSendForFaceSignIn(phoneNumber, imageBase);
-//                        }
-//                        else if (message.what == FACE_DETECT_FAILED) {
-//                            makeToast("未检测到人脸，无法上传登录");
-//                        }
-//                    }
-//                }
+                phoneNumber = signInUserName.getText().toString().trim();
+                postSendForFaceSignIn(phoneNumber, imageBase);
                 break;
 
             //如果是注册行为，将照片传给postSendForSignUp函数
             case USER_SIGN_UP_ACTION:
-//                if (resultCode == RESULT_OK) {
-//                    if (message.what == FACE_DETECT_SUCCESS){
-                        phoneNumber = signUpUserName.getText().toString().trim();
-                        password=signUpPassword.getText().toString().trim();
-                        postSendForSignUp(phoneNumber,password,imageBase);
-//                    }
-//                    else if (message.what == FACE_DETECT_FAILED)
-//                        makeToast("未检测到人脸，无法上传进行注册");
-//                }
+                phoneNumber = signUpUserName.getText().toString().trim();
+                password=signUpPassword.getText().toString().trim();
+                postSendForSignUp(phoneNumber,password,imageBase);
                 break;
 
             //其他情况
