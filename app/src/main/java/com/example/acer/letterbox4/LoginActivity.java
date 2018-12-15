@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.FaceDetector;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
@@ -22,37 +21,26 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.tools.BaseActivity;
 import com.tools.Httphelper;
-
 import com.tools.ImageFactory;
 import com.tools.Md5Encoding;
 import com.tools.SetImageUri;
 import com.tools.TimeCountUtil;
-
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginActivity extends BaseActivity {
-    //与检测人脸相关
-    private static final int MAX_FACE_NUM = 5;//最大可以检测出的人脸数量
-    private int realFaceNum = 0;//实际检测出的人脸数量
-    private boolean faceExit=false;
-    private final int FACE_DETECT_SUCCESS=20;
-    private final int FACE_DETECT_FAILED=21;
-    public Message message=new Message();
 
+public class LoginActivity extends BaseActivity {
     //用键值对的形式保存账号密码实现记住密码
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
 
     public static Uri imageUri; //相机拍摄照片的输出地址
-    private static final String TAG = "LoginActivity";
     private static final String domain = "47.101.173.82:8080";
     private boolean usingFaceLogin = false; //标识刷脸登陆
     private boolean isRemenberPsw = false; //标识记住密码
@@ -60,7 +48,6 @@ public class LoginActivity extends BaseActivity {
     String phoneNumber;
     String password;
     String codeInput;
-    String imageBase;
 
     //登陆布局
     RelativeLayout signInGroup;
@@ -82,7 +69,7 @@ public class LoginActivity extends BaseActivity {
     TextView tvInSignUp;
 
     //重置密码布局，手机号码，密码，验证码
-    LinearLayout rePasswordGroup;
+    RelativeLayout rePasswordGroup;
     EditText rePasswordUserName;
     EditText rePassword;
     EditText codeForRePassword; //输入验证码
@@ -104,6 +91,8 @@ public class LoginActivity extends BaseActivity {
     private TimeCountUtil timeCountUtilFSP;//注册页中获取验证码倒计时
     private TimeCountUtil timeCountUtilFRP;//忘记密码页中获取验证码倒计时
     public String codeGet; //获取验证码md5值
+
+    private  static final int SIGNIN_SUCCESS_ACTION=181;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -219,32 +208,32 @@ public class LoginActivity extends BaseActivity {
 
     public void initID(){
         //登陆页
-        signUpGroup=(RelativeLayout) findViewById(R.id.SignUpGroup); //登陆布局
-        signInUserName=(EditText)findViewById(R.id.signInUserName); //手机号码输入框
-        signInPassword=(EditText)findViewById(R.id.signInPassword); //密码输入框
-        cbUseFaceSignIn=(CheckBox)findViewById(R.id.cbUseFaceSignIn); //刷脸登陆复选框
-        cbRememberPassword=(CheckBox)findViewById(R.id.cbRememberPassword); //记住密码复选框
-        btnForSignIn=(Button) findViewById(R.id.signInBtn);//登陆按钮
-        tvInSignIn=(TextView) findViewById(R.id.signInTv);//立即注册文本框
-        tv2InSignIn=(TextView) findViewById(R.id.signInTv2); //忘记密码文本框
+        signUpGroup= findViewById(R.id.SignUpGroup); //登陆布局
+        signInUserName= findViewById(R.id.signInUserName); //手机号码输入框
+        signInPassword= findViewById(R.id.signInPassword); //密码输入框
+        cbUseFaceSignIn= findViewById(R.id.cbUseFaceSignIn); //刷脸登陆复选框
+        cbRememberPassword= findViewById(R.id.cbRememberPassword); //记住密码复选框
+        btnForSignIn= findViewById(R.id.signInBtn);//登陆按钮
+        tvInSignIn= findViewById(R.id.signInTv);//立即注册文本框
+        tv2InSignIn= findViewById(R.id.signInTv2); //忘记密码文本框
 
         //注册页
-        signInGroup=(RelativeLayout)findViewById(R.id.SignInGrpup); //注册布局
-        signUpUserName=(EditText)findViewById(R.id.signUpUserName); //手机号码输入框
-        signUpPassword=(EditText)findViewById(R.id.signUpPassword); //密码输入框
-        codeForSignUp=(EditText)findViewById(R.id.codeForSignUp); //验证码输入框
-        btnGetCodeForSignUp=(Button)findViewById(R.id.btn_getCodeForSignUp); //获取验证码按钮
-        btnForSignUp=(Button) findViewById(R.id.signUpBtn);//注册按钮
-        tvInSignUp=(TextView)findViewById(R.id.signUpTv);
+        signInGroup= findViewById(R.id.SignInGrpup); //注册布局
+        signUpUserName= findViewById(R.id.signUpUserName); //手机号码输入框
+        signUpPassword= findViewById(R.id.signUpPassword); //密码输入框
+        codeForSignUp= findViewById(R.id.codeForSignUp); //验证码输入框
+        btnGetCodeForSignUp= findViewById(R.id.btn_getCodeForSignUp); //获取验证码按钮
+        btnForSignUp= findViewById(R.id.signUpBtn);//注册按钮
+        tvInSignUp= findViewById(R.id.signUpTv);
 
         //忘记密码页
-        rePasswordGroup=(LinearLayout)findViewById(R.id.RePasswordGroup); //忘记密码布局
-        rePasswordUserName=(EditText)findViewById(R.id.rePasswordUserName); //手机号码输入框
-        rePassword=(EditText)findViewById(R.id.rePassword); //密码输入框
-        codeForRePassword=(EditText)findViewById(R.id.codeForRePassword); //验证码输入
-        btnGetCodeForRePassword=(Button)findViewById(R.id.btn_getCodeForRePassword); //获取验证码按钮
-        tvInRePassword=(TextView)findViewById(R.id.rePasswordTv); //返回登录文本框
-        btnForRePassword=(Button) findViewById(R.id.rePasswordBtn); //重置按钮
+        rePasswordGroup= findViewById(R.id.RePasswordGroup); //忘记密码布局
+        rePasswordUserName= findViewById(R.id.rePasswordUserName); //手机号码输入框
+        rePassword= findViewById(R.id.rePassword); //密码输入框
+        codeForRePassword= findViewById(R.id.codeForRePassword); //验证码输入
+        btnGetCodeForRePassword= findViewById(R.id.btn_getCodeForRePassword); //获取验证码按钮
+        tvInRePassword= findViewById(R.id.rePasswordTv); //返回登录文本框
+        btnForRePassword= findViewById(R.id.rePasswordBtn); //重置按钮
 
         //设置状态栏和标题栏同色（Android5.0以上才有用）
         try {
@@ -451,10 +440,8 @@ public class LoginActivity extends BaseActivity {
                 //此处实现主活动的滑动菜单的登录成功后的用户名显示
                 Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                 //mainusername是主界面用户图像下面的用户名
-                intent.putExtra("mainusername",phoneNumber);
-                setResult(RESULT_OK, intent);
                 finish();
-                startActivity(intent);
+                startActivityForResult(intent,SIGNIN_SUCCESS_ACTION);
             }
             return false;
         }
@@ -585,7 +572,6 @@ public class LoginActivity extends BaseActivity {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
     }
 
-
     //用于将照片数据处理返回上一个活动
     @Override
     protected void onActivityResult(int requestCode,int resultCode,Intent data) {
@@ -604,20 +590,6 @@ public class LoginActivity extends BaseActivity {
             byte[]picbyte=baos.toByteArray();
             //这里使用系统自带的Base64的包
             imageBase= Base64.encodeToString(picbyte,Base64.DEFAULT);
-
-            //////////////////////////////android自带人脸检测//////////////////////////////
-            FaceDetector faceDetector = new FaceDetector(bitmap.getWidth(), bitmap.getHeight(), MAX_FACE_NUM);
-            FaceDetector.Face[] faces = new FaceDetector.Face[MAX_FACE_NUM];
-            realFaceNum = faceDetector.findFaces(bitmap, faces);
-
-            if (realFaceNum > 0) {
-                faceExit = true;
-                message.what = FACE_DETECT_SUCCESS;
-            } else {
-                faceExit = false;
-                message.what = FACE_DETECT_FAILED;
-            }
-
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -625,30 +597,15 @@ public class LoginActivity extends BaseActivity {
         switch (requestCode) {
             //如果是登录行为，将照片数据传给postSendForFaceSignIn函数
             case USER_SIGN_IN_ACTION:
-                if (resultCode == RESULT_OK) {
-                    if (usingFaceLogin) {
-                        if (message.what == FACE_DETECT_SUCCESS) {
-                            phoneNumber = signInUserName.getText().toString().trim();
-                            postSendForFaceSignIn(phoneNumber, imageBase);
-                        }
-                        else if (message.what == FACE_DETECT_FAILED) {
-                            makeToast("未检测到人脸，无法上传登录");
-                        }
-                    }
-                }
+                phoneNumber = signInUserName.getText().toString().trim();
+                postSendForFaceSignIn(phoneNumber, imageBase);
                 break;
 
             //如果是注册行为，将照片传给postSendForSignUp函数
             case USER_SIGN_UP_ACTION:
-                if (resultCode == RESULT_OK) {
-                    if (message.what == FACE_DETECT_SUCCESS){
-                        phoneNumber = signUpUserName.getText().toString().trim();
-                        password=signUpPassword.getText().toString().trim();
-                        postSendForSignUp(phoneNumber,password,imageBase);
-                    }
-                    else if (message.what == FACE_DETECT_FAILED)
-                        makeToast("未检测到人脸，无法上传进行注册");
-                }
+                phoneNumber = signUpUserName.getText().toString().trim();
+                password=signUpPassword.getText().toString().trim();
+                postSendForSignUp(phoneNumber,password,imageBase);
                 break;
 
             //其他情况
